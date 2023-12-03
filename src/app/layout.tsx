@@ -16,11 +16,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  console.log(db)
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
         </ThemeProvider>
       </body>

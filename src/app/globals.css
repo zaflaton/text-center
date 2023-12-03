@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  height: 100%;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -97,10 +102,10 @@
 .ce-popover-item__icon {
   @apply dark:bg-background text-white font-medium shadow-none dark:border-[1px] !important;
 }
-
+/* 
 .ce-popover-item__title {
   @apply dark:text-Neutrals/neutrals-7 font-normal;
-}
+} */
 
 .cdx-search-field {
   @apply bg-background;
@@ -136,8 +141,8 @@
   @apply !border-none;
 }
 
-.ql-editor > p,
+/* .ql-editor > p,
 ol,
 ul {
   @apply dark:text-washed-purple-700;
-}
+} */
