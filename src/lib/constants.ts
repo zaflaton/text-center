@@ -114,7 +114,7 @@ export const PRICING_CARDS = [
   {
     planType: 'Free Plan',
     price: '0',
-    description: 'Limited block trials  for teams',
+    description: 'Limited block 30 days trials for teams',
     highlightFeature: '',
     features: [
       'Unlimited blocks for teams',
