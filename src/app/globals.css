@@ -18,16 +18,16 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 266, 100%, 50%;
+    --primary: 210, 100%, 40%;
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 220 14.3% 95.9%;
+    --secondary: 273 67% 59%;
     --secondary-foreground: 220.9 39.3% 11%;
 
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
 
-    --accent: 220 14.3% 95.9%;
+    --accent: 269 97% 85%;
     --accent-foreground: 220.9 39.3% 11%;
 
     --destructive: 0 84.2% 60.2%;
@@ -49,17 +49,17 @@ body {
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 266, 100%, 50%;
+    --primary: 210, 100%, 40%;
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 215 27.9% 16.9%;
+    --secondary: 273 67% 39%;
     --secondary-foreground: 210 20% 98%;
 
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 30.9%;
 
     --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent-foreground: 269 100% 80%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
@@ -79,7 +79,7 @@ body {
 }
 
 .animate-slide {
-  animation: 15s slide linear infinite;
+  animation: 20s slide linear infinite;
 }
 
 @keyframes slide {
