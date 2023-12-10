@@ -18,11 +18,11 @@ body {
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
 
-    --primary: 210, 100%, 40%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 273 67% 59%;
+    --primary-foreground: 220.9 39.3% 11%;
 
-    --secondary: 273 67% 59%;
-    --secondary-foreground: 220.9 39.3% 11%;
+    --secondary: 210, 100%, 40%;
+    --secondary-foreground: 210 20% 98%;
 
     --muted: 220 14.3% 95.9%;
     --muted-foreground: 220 8.9% 46.1%;
@@ -49,10 +49,10 @@ body {
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 210, 100%, 40%;
+    --primary: 273 67% 39%;
     --primary-foreground: 210 20% 98%;
 
-    --secondary: 273 67% 39%;
+    --secondary: 210, 100%, 40%;
     --secondary-foreground: 210 20% 98%;
 
     --muted: 215 27.9% 16.9%;
@@ -96,11 +96,11 @@ body {
 }
 
 .ce-popover--opened {
-  @apply bg-card outline-none border-border dark:text-muted;
+  @apply border-border bg-card outline-none dark:text-muted;
 }
 
 .ce-popover-item__icon {
-  @apply dark:bg-background text-white font-medium shadow-none dark:border-[1px] !important;
+  @apply font-medium text-white shadow-none dark:border-[1px] dark:bg-background !important;
 }
 /* 
 .ce-popover-item__title {
@@ -130,7 +130,7 @@ body {
 }
 
 .ql-toolbar {
-  @apply flex flex-wrap items-center justify-center dark:bg-background/70 bg-white/40 backdrop-blur-md z-40 sticky top-0 !border-none left-0 right-0;
+  @apply sticky left-0 right-0 top-0 z-40 flex flex-wrap items-center justify-center !border-none bg-white/40 backdrop-blur-md dark:bg-background/70;
 }
 
 .ql-formats {

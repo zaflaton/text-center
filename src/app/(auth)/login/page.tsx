@@ -20,7 +20,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Loader from '@/components/shared/loader'
 import { Separator } from '@/components/ui/separator'
-// import { actionLoginUser } from '@/lib/server-actions/auth-actions'
+import { loginAction } from '@/actions/auth-actions'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -36,12 +36,12 @@ export default function LoginPage() {
   const onSubmit: SubmitHandler<z.infer<typeof FormSchema>> = async (
     formData,
   ) => {
-    // const { error } = await actionLoginUser(formData)
-    // if (error) {
-    //   form.reset()
-    //   setSubmitError(error.message)
-    // }
-    // router.replace('/dashboard')
+    const { error } = await loginAction(formData)
+    if (error) {
+      form.reset()
+      setSubmitError(error.message)
+    }
+    router.replace('/dashboard')
   }
 
   return (
@@ -91,7 +91,6 @@ export default function LoginPage() {
         {submitError && <FormMessage>{submitError}</FormMessage>}
         <Button
           type="submit"
-          variant="secondary"
           className="w-full p-6 "
           size="lg"
           disabled={isLoading}
@@ -100,7 +99,7 @@ export default function LoginPage() {
         </Button>
         <span className="self-center">
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className="text-secondary">
+          <Link href="/signup" className="text-primary">
             Sign Up
           </Link>
         </span>

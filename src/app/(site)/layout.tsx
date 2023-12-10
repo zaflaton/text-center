@@ -1,3 +1,4 @@
+import Header from '@/components/landing-page/header'
 import React from 'react'
 
 export default function HomePageLayout({
@@ -5,5 +6,10 @@ export default function HomePageLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <main>{children}</main>
+  return (
+    <>
+      <Header />
+      <main>{children}</main>
+    </>
+  )
 }

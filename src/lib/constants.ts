@@ -4,6 +4,51 @@ import client3 from '../../public/client3.png'
 import client4 from '../../public/client4.png'
 import client5 from '../../public/client5.png'
 
+export const ROUTES = [
+  { title: 'Features', href: '#features' },
+  { title: 'Resources', href: '#resources' },
+  { title: 'Pricing', href: '#pricing' },
+  { title: 'Testimonials', href: '#testimonial' },
+]
+
+export const COMPONENTS = [
+  {
+    title: 'Alert Dialog',
+    href: '#',
+    description:
+      'A modal dialog that interrupts the user with important content and expects a response.',
+  },
+  {
+    title: 'Hover Card',
+    href: '#',
+    description:
+      'For sighted users to preview content available behind a link.',
+  },
+  {
+    title: 'Progress',
+    href: '#',
+    description:
+      'Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.',
+  },
+  {
+    title: 'Scroll-area',
+    href: '#',
+    description: 'Visually or semantically separates content.',
+  },
+  {
+    title: 'Tabs',
+    href: '#',
+    description:
+      'A set of layered sections of content—known as tab panels—that are displayed one at a time.',
+  },
+  {
+    title: 'Tooltip',
+    href: '#',
+    description:
+      'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.',
+  },
+]
+
 export const CLIENTS = [
   { alt: 'client1', logo: client1 },
   { alt: 'client2', logo: client2 },

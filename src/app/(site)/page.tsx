@@ -66,7 +66,7 @@ export default function HomePage() {
         </div>
       </section>
       <section className="relative">
-        <div className="-z-100 absolute top-56 h-32 w-full rounded-full bg-secondary/50 blur-[120px]" />
+        <div className="-z-100 absolute top-56 h-32 w-full rounded-full bg-primary/50 blur-[120px]" />
         <div className="mt-20 flex flex-col overflow-visible overflow-x-hidden px-4 sm:px-6">
           <TitleSection
             title="Trusted by all"
@@ -109,7 +109,7 @@ export default function HomePage() {
                     </div>
                   }
                   cardContent={
-                    <p className="text-foreground">{testimonial.message}</p>
+                    <p className="text-foreground/60">{testimonial.message}</p>
                   }
                 ></CustomCard>
               ))}
@@ -130,8 +130,7 @@ export default function HomePage() {
               className={cn(
                 ' relative w-[300px] rounded-2xl backdrop-blur-3xl dark:bg-black/40',
                 {
-                  'border-secondary/70':
-                    card.planType === PRICING_PLANS.proPlan,
+                  'border-primary/70': card.planType === PRICING_PLANS.proPlan,
                 },
               )}
               cardHeader={
@@ -153,11 +152,8 @@ export default function HomePage() {
                 <CardContent className="p-0">
                   <span className="text-2xl font-normal">${card.price}</span>
                   {+card.price > 0 ? <span className="ml-1">/mo</span> : ''}
-                  <p className="text-foreground/50">{card.description}</p>
-                  <Button
-                    variant="secondary"
-                    className="mt-4 w-full whitespace-nowrap"
-                  >
+                  <p className="text-foreground/60">{card.description}</p>
+                  <Button className="mt-4 w-full">
                     {card.planType === PRICING_PLANS.proPlan
                       ? 'Go Pro'
                       : 'Get Started'}
