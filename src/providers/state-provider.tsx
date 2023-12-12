@@ -22,23 +22,41 @@ interface AppState {
 }
 
 type Action =
-  | { type: 'ADD_WORKSPACE'; payload: appWorkspacesType }
-  | { type: 'DELETE_WORKSPACE'; payload: string }
   | {
-      type: 'UPDATE_WORKSPACE'
-      payload: { workspace: Partial<appWorkspacesType>; workspaceId: string }
+      type: 'ADD_WORKSPACE'
+      payload: appWorkspacesType
+    }
+  | {
+      type: 'DELETE_WORKSPACE'
+      payload: string
     }
   | {
       type: 'SET_WORKSPACES'
       payload: { workspaces: appWorkspacesType[] | [] }
     }
   | {
-      type: 'SET_FOLDERS'
-      payload: { workspaceId: string; folders: [] | appFoldersType[] }
+      type: 'UPDATE_WORKSPACE'
+      payload: { workspace: Partial<appWorkspacesType>; workspaceId: string }
     }
   | {
       type: 'ADD_FOLDER'
       payload: { workspaceId: string; folder: appFoldersType }
+    }
+  | {
+      type: 'DELETE_FOLDER'
+      payload: { workspaceId: string; folderId: string }
+    }
+  | {
+      type: 'SET_FOLDERS'
+      payload: { workspaceId: string; folders: [] | appFoldersType[] }
+    }
+  | {
+      type: 'UPDATE_FOLDER'
+      payload: {
+        folder: Partial<appFoldersType>
+        workspaceId: string
+        folderId: string
+      }
     }
   | {
       type: 'ADD_FILE'
@@ -49,20 +67,8 @@ type Action =
       payload: { workspaceId: string; folderId: string; fileId: string }
     }
   | {
-      type: 'DELETE_FOLDER'
-      payload: { workspaceId: string; folderId: string }
-    }
-  | {
       type: 'SET_FILES'
       payload: { workspaceId: string; files: File[]; folderId: string }
-    }
-  | {
-      type: 'UPDATE_FOLDER'
-      payload: {
-        folder: Partial<appFoldersType>
-        workspaceId: string
-        folderId: string
-      }
     }
   | {
       type: 'UPDATE_FILE'
@@ -93,6 +99,11 @@ const appReducer = (
           (workspace) => workspace.id !== action.payload,
         ),
       }
+    case 'SET_WORKSPACES':
+      return {
+        ...state,
+        workspaces: action.payload.workspaces,
+      }
     case 'UPDATE_WORKSPACE':
       return {
         ...state,
@@ -106,10 +117,35 @@ const appReducer = (
           return workspace
         }),
       }
-    case 'SET_WORKSPACES':
+
+    case 'ADD_FOLDER':
       return {
         ...state,
-        workspaces: action.payload.workspaces,
+        workspaces: state.workspaces.map((workspace) => {
+          return {
+            ...workspace,
+            folders: [...workspace.folders, action.payload.folder].sort(
+              (a, b) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime(),
+            ),
+          }
+        }),
+      }
+    case 'DELETE_FOLDER':
+      return {
+        ...state,
+        workspaces: state.workspaces.map((workspace) => {
+          if (workspace.id === action.payload.workspaceId) {
+            return {
+              ...workspace,
+              folders: workspace.folders.filter(
+                (folder) => folder.id !== action.payload.folderId,
+              ),
+            }
+          }
+          return workspace
+        }),
       }
     case 'SET_FOLDERS':
       return {
@@ -126,20 +162,6 @@ const appReducer = (
             }
           }
           return workspace
-        }),
-      }
-    case 'ADD_FOLDER':
-      return {
-        ...state,
-        workspaces: state.workspaces.map((workspace) => {
-          return {
-            ...workspace,
-            folders: [...workspace.folders, action.payload.folder].sort(
-              (a, b) =>
-                new Date(a.createdAt).getTime() -
-                new Date(b.createdAt).getTime(),
-            ),
-          }
         }),
       }
     case 'UPDATE_FOLDER':
@@ -160,42 +182,7 @@ const appReducer = (
           return workspace
         }),
       }
-    case 'DELETE_FOLDER':
-      return {
-        ...state,
-        workspaces: state.workspaces.map((workspace) => {
-          if (workspace.id === action.payload.workspaceId) {
-            return {
-              ...workspace,
-              folders: workspace.folders.filter(
-                (folder) => folder.id !== action.payload.folderId,
-              ),
-            }
-          }
-          return workspace
-        }),
-      }
-    case 'SET_FILES':
-      return {
-        ...state,
-        workspaces: state.workspaces.map((workspace) => {
-          if (workspace.id === action.payload.workspaceId) {
-            return {
-              ...workspace,
-              folders: workspace.folders.map((folder) => {
-                if (folder.id === action.payload.folderId) {
-                  return {
-                    ...folder,
-                    files: action.payload.files,
-                  }
-                }
-                return folder
-              }),
-            }
-          }
-          return workspace
-        }),
-      }
+
     case 'ADD_FILE':
       return {
         ...state,
@@ -235,6 +222,27 @@ const appReducer = (
                     files: folder.files.filter(
                       (file) => file.id !== action.payload.fileId,
                     ),
+                  }
+                }
+                return folder
+              }),
+            }
+          }
+          return workspace
+        }),
+      }
+    case 'SET_FILES':
+      return {
+        ...state,
+        workspaces: state.workspaces.map((workspace) => {
+          if (workspace.id === action.payload.workspaceId) {
+            return {
+              ...workspace,
+              folders: workspace.folders.map((folder) => {
+                if (folder.id === action.payload.folderId) {
+                  return {
+                    ...folder,
+                    files: action.payload.files,
                   }
                 }
                 return folder
@@ -289,11 +297,11 @@ const AppStateContext = createContext<
   | undefined
 >(undefined)
 
-interface AppStateProviderProps {
+type AppStateProviderProps = {
   children: React.ReactNode
 }
 
-const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
+export default function AppStateProvider({ children }: AppStateProviderProps) {
   const [state, dispatch] = useReducer(appReducer, initialState)
   const pathname = usePathname()
 
@@ -349,8 +357,6 @@ const AppStateProvider: React.FC<AppStateProviderProps> = ({ children }) => {
     </AppStateContext.Provider>
   )
 }
-
-export default AppStateProvider
 
 export const useAppState = () => {
   const context = useContext(AppStateContext)

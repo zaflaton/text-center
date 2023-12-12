@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import SelectedWorkspace from './selected-workspace'
 import CustomDialogTrigger from '../shared/custom-dialog'
 import WorkspaceCreator from '../shared/workspace-creator'
+import { Plus } from 'lucide-react'
 
 type WorkspaceDropdownProps = {
   privateWorkspaces: workspace[] | []
@@ -60,7 +61,7 @@ export default function WorkspaceDropdown({
 
   return (
     <div className="relative inline-block text-left">
-      <div>
+      <div className=" mb-2 ">
         <span onClick={() => setIsOpen(!isOpen)}>
           {selectedOption ? (
             <SelectedWorkspace workspace={selectedOption} />
@@ -70,12 +71,12 @@ export default function WorkspaceDropdown({
         </span>
       </div>
       {isOpen && (
-        <div className="group absolute z-50 h-[190px] w-full origin-top-right overflow-y-auto rounded-md border border-muted bg-black/10 shadow-md backdrop-blur-lg">
-          <div className="flex flex-col rounded-md">
-            <div className="!p-2">
+        <div className="group absolute z-50 h-fit w-full origin-top-right overflow-y-auto rounded-md border border-muted shadow-md backdrop-blur-lg">
+          <div className="flex flex-col p-2">
+            <div className="flex flex-col gap-2">
               {!!privateWorkspaces.length && (
-                <>
-                  <p className="pb-2 text-muted-foreground">Private</p>
+                <div className="flex flex-col gap-2 rounded-md border p-2">
+                  <p className=" text-muted-foreground">Private</p>
                   <hr />
                   {privateWorkspaces.map((option) => (
                     <SelectedWorkspace
@@ -84,10 +85,10 @@ export default function WorkspaceDropdown({
                       onClick={handleSelect}
                     />
                   ))}
-                </>
+                </div>
               )}
               {!!sharedWorkspaces.length && (
-                <>
+                <div className="mb-2 rounded-md border p-2">
                   <p className="pb-2 text-muted-foreground">Shared</p>
                   <hr />
                   {sharedWorkspaces.map((option) => (
@@ -97,10 +98,10 @@ export default function WorkspaceDropdown({
                       onClick={handleSelect}
                     />
                   ))}
-                </>
+                </div>
               )}
               {!!collaboratingWorkspaces.length && (
-                <>
+                <div className="mb-2 rounded-md border p-2">
                   <p className="text-muted-foreground">Collaborating</p>
                   <hr />
                   {collaboratingWorkspaces.map((option) => (
@@ -110,7 +111,7 @@ export default function WorkspaceDropdown({
                       onClick={handleSelect}
                     />
                   ))}
-                </>
+                </div>
               )}
             </div>
             <CustomDialogTrigger
@@ -118,10 +119,10 @@ export default function WorkspaceDropdown({
               content={<WorkspaceCreator />}
               description="Workspaces give you the power to collaborate with others. You can change your workspace privacy settings after creating the workspace too."
             >
-              <div className="flex w-full items-center justify-center gap-2 p-2 transition-all hover:bg-muted">
-                <p className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-800 text-slate-500">
-                  +
-                </p>
+              <div className="flex w-full items-center justify-center gap-2 rounded-md border p-2 transition-all hover:bg-muted">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-slate-800 text-slate-500">
+                  <Plus className="h-4 w-4" />
+                </span>
                 Create workspace
               </div>
             </CustomDialogTrigger>

@@ -144,29 +144,32 @@ export default function WorkspaceCreator() {
             <span className="text-sm text-muted-foreground">
               Collaborators {collaborators.length || ''}
             </span>
-            <ScrollArea className="h-[120px] w-full overflow-y-auto rounded-md border border-muted-foreground/20">
+            <ScrollArea className="h-[120px] w-full overflow-hidden rounded-md border border-muted-foreground/20">
               {collaborators.length ? (
                 collaborators.map((c) => (
-                  <div
-                    className="flex items-center justify-between p-4"
-                    key={c.id}
-                  >
-                    <div className="flex items-center gap-4">
-                      <Avatar>
-                        <AvatarImage src="/avatars/7.png" />
-                        <AvatarFallback>PJ</AvatarFallback>
-                      </Avatar>
-                      <div className="w-[140px] gap-2 overflow-hidden overflow-ellipsis text-sm text-muted-foreground sm:w-[300px]">
-                        {c.email}
-                      </div>
-                    </div>
-                    <Button
-                      variant="secondary"
-                      onClick={() => removeCollaborator(c)}
+                  <>
+                    <div
+                      className="flex items-center  justify-between p-4"
+                      key={c.id}
                     >
-                      Remove
-                    </Button>
-                  </div>
+                      <div className="flex items-center gap-4">
+                        <Avatar>
+                          {c.avatarUrl && <AvatarImage src={c.avatarUrl} />}
+                          <AvatarFallback>TC</AvatarFallback>
+                        </Avatar>
+                        <div className="overflow-hidden overflow-ellipsis text-sm text-muted-foreground">
+                          {c.email}
+                        </div>
+                      </div>
+                      <Button
+                        variant="secondary"
+                        onClick={() => removeCollaborator(c)}
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                    <hr />
+                  </>
                 ))
               ) : (
                 <div className="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center">

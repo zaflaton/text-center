@@ -88,7 +88,7 @@ export default function CollaboratorSearch({
               >
                 <div className="flex items-center gap-4">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src="/avatars/7.png" />
+                    {user.avatarUrl && <AvatarImage src={user.avatarUrl} />}
                     <AvatarFallback>CP</AvatarFallback>
                   </Avatar>
                   <div className="w-[180px] gap-2 overflow-hidden overflow-ellipsis text-sm text-muted-foreground">
